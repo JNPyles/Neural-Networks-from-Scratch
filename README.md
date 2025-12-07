@@ -3,7 +3,7 @@ Building neural networks using Python and NumPy based on [Neural Networks from S
 
 ## Terms
 
-### Data
+### Data Structures
 - Array: a common programming data structure consisting of a homogeneous (same type of data) container of numbers; used in NumPy
 - List: Python data structure similar to an array but can contain non-homogenous data.
 - Scalar: a single number; rank 0 tensor
@@ -45,16 +45,15 @@ Example inputs:
 
     inputs = [1.0, 2.0, 3.0, 2.5]
 
-Example weights:
-weights1 = [0.2, 0.8, -0.5, 1.0]
-weights2 = [0.5,
-weights3 = [-0.26,
--0.5, 1]
--0.91, 0.26,
--0.5]
--0.27, 0.17, 0.87]
-bias1 = 2
-bias2 = 3
-bias3 = 0.5
+Example weights and biases:
+
+    weights = [
+        [0.2,0.8,-0.5,1],
+        [0.5,-0.91,0.26,-0.5],
+        [-0.26,-0.27,0.17,0.87]
+        ]
+    biases = [2.0,3.0,0.5]
+
+Note: This example consists of 4 input values fully connected to 3 neurons. 
 
 

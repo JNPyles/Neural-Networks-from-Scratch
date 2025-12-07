@@ -21,9 +21,11 @@ Building neural networks using Python and NumPy based on [Neural Networks from S
 ### Single Neuron
 
 Example inputs:
+
     inputs = [1.0, 2.0, 3.0, 2.5]
 
 Example neuron weights and bais: 
+
     weights = [0.2, 0.8, -0.5, 1.0]
     bias = 2.0
 

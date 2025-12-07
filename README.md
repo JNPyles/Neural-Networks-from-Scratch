@@ -13,7 +13,15 @@ Building neural networks using Python and NumPy based on [Neural Networks from S
 - Dimension: the number of indices needed to locate a specific number in a tensor (for example, a list of lists has 2-dimensions, and 2 numbers are needed to locate a specific number in this tensor); the number of indices can be represented as an array/list/vector/tensor, which means the number of dimensions can be determined by counting the number of items in the array. 
 
 ### Operations:
-- Cross product: Results in a vector. 
-- Dot product: Results in a scalar, known as a "weighted sum." A sum of products of vector elements. Example: vector 1 = [A, B, C]; vector 2 = [X, Y, Z]; dot product of vectors 1 and 2 = A*X + B*Y + C*Z. 
-- Vector multiplication: 
-- Matrix multiplication: 
+- Dot product: Results in a scalar, known as a "weighted sum." A sum of products of vector elements. Example: vector 1 = [A, B, C]; vector 2 = [X, Y, Z]; dot product of vectors 1 and 2 = A*X + B*Y + C*Z.
+- Vector additon: element-wise additon. Example: vector 1 = [A, B, C]; vector 2 = [X, Y, Z]; addition of vectors 1 and 2 = [A+X, B+Y, C+Z].
+
+## Building Blocks
+
+### Single Neuron
+A single neuron in Python:
+
+    this is code
+    This is also code
+
+This is 

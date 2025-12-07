@@ -19,9 +19,19 @@ Building neural networks using Python and NumPy based on [Neural Networks from S
 ## Building Blocks
 
 ### Single Neuron
-A single neuron in Python:
 
-    this is code
-    This is also code
+Example inputs:
+    inputs = [1.0, 2.0, 3.0, 2.5]
 
-This is 
+Example neuron weights and bais: 
+    weights = [0.2, 0.8, -0.5, 1.0]
+    bias = 2.0
+
+Note: A dot prodcut operation can be performed on the inputs and weights becuase they both have the same number of elements (each input is connected to the neuron with a weight).  
+
+Calculate outpout using basic Python:
+    dot_product = sum(x * w for x, w in zip(inputs, weights))
+    output = dot_product + bias
+
+Calculate outpout using Python & NumPy:
+    output = np.dot(weights, inputs)

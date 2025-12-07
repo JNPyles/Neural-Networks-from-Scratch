@@ -32,8 +32,29 @@ Example neuron weights and bais:
 Note: A dot prodcut operation can be performed on the inputs and weights becuase they both have the same number of elements (each input is connected to the neuron with a weight).  
 
 Calculate outpout using basic Python:
-    dot_product = sum(x * w for x, w in zip(inputs, weights))
-    output = dot_product + bias
 
+    output = sum(x * w for x, w in zip(inputs, weights)) + bias
+    
 Calculate outpout using Python & NumPy:
-    output = np.dot(weights, inputs)
+
+    output = np.dot(weights, inputs) + bias
+
+### Neuron Layer
+
+Example inputs:
+
+    inputs = [1.0, 2.0, 3.0, 2.5]
+
+Example weights:
+weights1 = [0.2, 0.8, -0.5, 1.0]
+weights2 = [0.5,
+weights3 = [-0.26,
+-0.5, 1]
+-0.91, 0.26,
+-0.5]
+-0.27, 0.17, 0.87]
+bias1 = 2
+bias2 = 3
+bias3 = 0.5
+
+

@@ -106,4 +106,11 @@ Calculate the layer outputs using the batch of inputs with NumPy:
 
 Note: The NumPy transpose operation only works on a NumPy array, which is why the weights are converted into a NumPy array above. 
 
+#### Multiple Layers
+When there are multiple layers, the output of one layer becomes the input to the next layer. As mentioned above, the output matrix for a layer consists of the samples in the first dimension (rows), and the neurons in the second dimension (columns). Each neuron is fully connected to the neurons in the next layer, with each connection represented by a weight. So, when performing the matrix multiplication between the layers, the second layer's first dimension must contain the weights, which match the number of neurons in the previous layer. For this reason, we again must perform a transposition. 
 
+Example calculating the output of two fully-connected layers:
+
+    layer_1_outputs = np.dot(inputs, np.array(weights).T) + biases
+    layer_2_outputs = np.dot(layer_1_outputs, np.array(weights2).T) + biases2
+    

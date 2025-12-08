@@ -18,7 +18,10 @@ Building neural networks using Python and NumPy based on [Neural Networks from S
 - Matrix product (aka matrix multiplication): a matrix created from two matrices (A,B) by performing dot products of all combinations of rows from matrix A and columns from matrix B. Note: the second dimension of matrix A must match the first dimension of matrix B; if A has a shape of (5,4), and B has a shape of (4,7), matrix multiplication is possible because the inner numbers match: 4. The shape of the resulting matrix is the first dimension of A and the second dimension of B; if the shape of A is (8,5) and the shape of B is (5,4), then the shape of the product matrix will be (8,4).
 - Transposition: modifies a matrix so that its rows become columns and columns become rows. 
 
-## Building Blocks
+### Neural Networks:
+- Forward pass: passing data through a model from beginning to end. 
+
+## Neurons and Layers
 
 ### Single Neuron
 
@@ -86,10 +89,10 @@ Training in batches of samples rather than individual samples is faster/more eff
 
 To calculate the outputs of a layer of neurons with a batch of samples, we use the **matrix product** operation. The matrix product operations takes two matrices and produces a single matrix: 
 - The batch matrix (Inputs) is organized so the first dimension contains the Samples (Batch Size) and the second dimension contains the Features.
-- The layer matrix (Weights) needs to be organized (for the calculation) so the first dimension contains the features and the second dimension contains the Neurons.
+- The layer matrix (Weights) needs to be organized (for the calculation) so the first dimension contains the features and the second dimension contains the neurons.
 - Once the matrix multiplication is performed, the resulting matrix represents the Samples in the first dimension and the Neurons (outputs) in the second dimension. The features have been summed up through the dot product calculation. The resulting matrix shows the output of each neuron in the layer for each sample. 
 
-#### Tranposition
+### Tranposition
 The layer matrix is typically stored as a list of lists with the neurons in the first dimension the weights in the second dimension, as shown in the example layer above. To perform the matrix multiplication operation, these dimensions need to be flipped. To do this, we perform a **transposition** operation. 
 
 Example batch of inputs: 
@@ -114,3 +117,29 @@ Example calculating the output of two fully-connected layers:
     layer_1_outputs = np.dot(inputs, np.array(weights).T) + biases
     layer_2_outputs = np.dot(layer_1_outputs, np.array(weights2).T) + biases2
     
+### Dense Layer Class
+
+To make it easier to build, we will take an object-oriented approach. First, we will define the Dense Layer Class. 
+
+A **dense layer** is a fully-connected layer, in which each input is connected to each neuron in the layer. 
+
+Let's start by defining an initialization method. 
+
+    # Dense layer
+    class Layer_Dense:
+
+        # Layer initialization 
+        def __init__(self, n_inputs, n_neurons):
+            self.weights = 0.01 * np.random.randn(n_inputs, n_neurons)
+            self.biases = np.zeros((1, n_neurons))
+
+Notes:
+
+- Here, the weights are initialized randomly, which works well when training a model from scratch. If we wanted to train a pre-trained model, we would instead initialize the weights and biases to the pre-trained model values.
+- np.random.randn produces a Gaussian distribution with a mean of 0 and a variance of 1, so the values will typically be between -1 and 1.
+- The shape of the np.random.randn function is determined by the parameters n_inputs, n_neurons.
+- We multiply the weights by 0.01 so that the weights will be easier to adjust during the training process. 
+- We initialize the weights to be (inputs, neurons) so that we do not need to transpose as described above.
+- For now, the biases are initialized to values of 0, which is a common practice, but sometimes we may want to use different values. 
+
+

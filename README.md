@@ -19,6 +19,8 @@ Building neural networks using Python and NumPy based on [Neural Networks from S
 - Transposition: modifies a matrix so that its rows become columns and columns become rows. 
 
 ### Neural Networks:
+- Activation function: a function applied to the output of a neuron that modifies the output, usually to make the output non-linear. 
+- Dense layer: a fully-connected layer of neurons. 
 - Forward pass: passing data through a model from beginning to end. 
 
 ## Neurons and Layers
@@ -109,7 +111,7 @@ Calculate the layer outputs using the batch of inputs with NumPy:
 
 Note: The NumPy transpose operation only works on a NumPy array, which is why the weights are converted into a NumPy array above. 
 
-#### Multiple Layers
+### Multiple Layers
 When there are multiple layers, the output of one layer becomes the input to the next layer. As mentioned above, the output matrix for a layer consists of the samples in the first dimension (rows), and the neurons in the second dimension (columns). Each neuron is fully connected to the neurons in the next layer, with each connection represented by a weight. So, when performing the matrix multiplication between the layers, the second layer's first dimension must contain the weights, which match the number of neurons in the previous layer. For this reason, we again must perform a transposition. 
 
 Example calculating the output of two fully-connected layers:
@@ -141,5 +143,31 @@ Notes:
 - We multiply the weights by 0.01 so that the weights will be easier to adjust during the training process. 
 - We initialize the weights to be (inputs, neurons) so that we do not need to transpose as described above.
 - For now, the biases are initialized to values of 0, which is a common practice, but sometimes we may want to use different values. 
+
+Next we define the forward method, which contains the logic for the forward pass through the network:
+
+    # forward pass
+    def forward(self, inputs):
+        self.output = np.dot(inputs, self.weights) + self.biases
+
+## Activation Functions
+
+List of activation functions:
+
+- Step: activates with a value of 1 if the neuron's output is greater than 0.
+- Linear: the output value equal the input, often used in last layer for regression.
+- Sigmoid: returns a value in the range of 0 for negative infinity, 0.5 for the input 0, and 1 for positive infinity.
+- Rectified linear: linear for outputs greater than 0, and 0 if the output is less than or equal to 0. Widely used for speed and efficiency. 
+
+### Rectified Linear Activation Class
+
+    #ReLU activation
+    class Activation_ReLU:
+
+        # Forward pass
+        def forward(self,inputs):
+            # Calculate output values from input
+            self.output = np.maximum(0, inputs)
+
 
 

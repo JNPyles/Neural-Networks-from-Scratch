@@ -56,4 +56,20 @@ Example weights and biases:
 
 Note: This example consists of 4 input values fully connected to 3 neurons. 
 
+Calculate the layer output using basic Python:
 
+    # Output of current layer
+    layer_outputs = []
+    # For each neuron
+    for neuron_weights, neuron_bias in zip(weights, biases):
+        # Initialize neuron output to 0
+        neuron_output = 0
+        # For each input and weight to the neuron
+        for n_input, weight in zip(inputs, neuron_weights):
+            # Multiply weight and input and add to neuron's output
+            neuron_output += n_input*weight
+        # Add bias
+        neuron_output += neuron_bias
+        # Add neuron output to layer's output list
+        layer_outputs.append(neuron_output)
+ 

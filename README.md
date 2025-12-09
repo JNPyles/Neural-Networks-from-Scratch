@@ -202,3 +202,11 @@ Notes:
 The loss function measures the model's error and is used to determine how to adjust the model's weights and biases to reduce the loss. 
 
 ### Categorial Cross-Entropy Loss
+
+
+
+Notes:
+- When calculating categorical cross-entropy loss, you compare the calculated probability distribution to reality. For example, if you are categorizing images into three categories: dog, cat, human, and the image is a dog, then the correct value can be represented in two ways: (1) one-hot, [1,0,0], where the first value represents the dog category and the other two represents the other categories, or (2) sparse, [0], where 0 is the index of the correct answer. When working with a batch, one-hot encoding will produce a 2D matrix, and sparse encoding will produce a 1D array. 
+- This loss function uses the negative log. Log(1) = 0 (no loss), and Log(0) = - infinity (lots of loss). We use the negative log loss so that the more wrong the result is the more loss (bigger positive number). Using the log function makes the loss exponentially greater the more wrong it is (steeper gradient).
+- If the model predicts 0 for the correct class, then the log(0) will be -infinity, which we can't work with. So, we clip the values so that they can be very close to 0 or 1 but not quite there.
+- Since we work with batches, we will calculate the average loss for the batch. 

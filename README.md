@@ -21,7 +21,9 @@ Building neural networks using Python and NumPy based on [Neural Networks from S
 ### Neural Networks:
 - Activation function: a function applied to the output of a neuron that modifies the output, usually to make the output non-linear. 
 - Dense layer: a fully-connected layer of neurons. 
-- Forward pass: passing data through a model from beginning to end. 
+- Forward pass: passing data through a model from beginning to end.
+- Squared error / mean squared error: loss function used for regression
+- Categorical cross-entropy: loss function used to calcualte the accuracy of predictions; it is commonly used in networks with a softmax activation on the output layer. 
 
 ## Neurons and Layers
 
@@ -195,3 +197,8 @@ Notes:
 - For the second step, we divide each value by the sum of the values in the layer to get a probability, ranging from 0 to 1 for each value.
 - For the sum operation, we again specify axis=1 because we want to get the sum of the values of the neurons (columns/axis=1) for each row. 
 
+## Loss Functions 
+
+The loss function measures the model's error and is used to determine how to adjust the model's weights and biases to reduce the loss. 
+
+### Categorial Cross-Entropy Loss

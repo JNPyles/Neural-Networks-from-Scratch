@@ -157,11 +157,12 @@ List of activation functions:
 - Step: activates with a value of 1 if the neuron's output is greater than 0.
 - Linear: the output value equal the input, often used in last layer for regression.
 - Sigmoid: returns a value in the range of 0 for negative infinity, 0.5 for the input 0, and 1 for positive infinity.
-- Rectified linear: linear for outputs greater than 0, and 0 if the output is less than or equal to 0. Widely used for speed and efficiency. 
+- Rectified linear: linear for outputs greater than 0, and 0 if the output is less than or equal to 0. Widely used for speed and efficiency.
+- Softmax: Often used for classification, it produces a normalized distribution of probabilities (aka "confidence scores"). 
 
 ### Rectified Linear Activation Class
 
-    #ReLU activation
+    # ReLU activation
     class Activation_ReLU:
 
         # Forward pass
@@ -169,5 +170,28 @@ List of activation functions:
             # Calculate output values from input
             self.output = np.maximum(0, inputs)
 
+###  Softmax Activation Class
 
+    # Softmax activation 
+    class Activation_Softmax:
+
+        # Forward pass
+        def forward(self, inputs):
+
+            # Get unnormalized probabilities
+            exp_values = np.exp(inputs - np.max(inputs, axis=1, keepdims=True))
+
+            # Normalize them for each sample
+            probabilities = exp_values / np.sum(exp_values, axis=1, keepdims=True)
+
+            self.output = probabilities
+
+Notes:
+
+- There are two steps to the softmax. First, we exponentiate all values. Second, we transform each value into a probability by dividing it by the sum of all the values in the layer for each sample. 
+- For the first step, we use NumPy's exp function.
+- Additionally, to prevent exploding values, we can subtract the largest value from each value, which makes all the values less than or equal to 0; when these are exponentiated, they range from 0 to 1.
+- Since the "inputs" is a matrix with the samples in the first dimension(rows) and the layer neurons in the second dimension (columns), we need to specify axis=1 to select the maximum value across the columns for each row. We also use keepdims=True so that everything stays lined up the same way. The result is that we are subtracting a vector of the max values from the values in the matrix by "broadcasting" the vector across the column for each row. 
+- For the second step, we divide each value by the sum of the values in the layer to get a probability, ranging from 0 to 1 for each value.
+- For the sum operation, we again specify axis=1 because we want to get the sum of the values of the neurons (columns/axis=1) for each row. 
 

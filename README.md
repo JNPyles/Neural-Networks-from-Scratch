@@ -224,8 +224,29 @@ The overall loss is the average (mean) value of all sample losses.
 ### Categorial Cross-Entropy Loss Class
 This loss function used to calcualte the accuracy of predictions; it is commonly used in networks with a softmax activation on the output layer. 
 
-    # Cross-entropy loss
-    class Loss
+    # Cross-entropy loss (inherits from Loss class)
+    class Loss_Categorical_Crossentropy(Loss):
+
+        # Forward pass
+        def forward(self, y_pred, y_true):
+
+            # Number of samples in a batch
+            samples = len(y_pred)
+
+            # Clip data to prevent division by zero; clip both sides for balance. 
+            y_pred_clipped = np.clip(y_pred, 1e-7, 1- 1e-7)
+
+            # Probabilities for target values
+            # If categorical labels
+            if len(y_true.shape) == 1:
+                correct_confidences = y_pred_clipped[range(samples), y_true]
+            # mask values if one-hot encoded
+            elif len(y_true.shape) == 2:
+                correct_confidences = np.sum(y_pred_clipped*y_true, axis=1)
+
+            # Losses
+            negative_log_likelihoods = -np.log(correct_confidences)
+            return negative_log_likelihoods
 
 Notes:
 - When calculating categorical cross-entropy loss, you compare the calculated probability distribution to reality. For example, if you are categorizing images into three categories: dog, cat, human, and the image is a dog, then the correct value can be represented in two ways: (1) one-hot, [1,0,0], where the first value represents the dog category and the other two represents the other categories, or (2) sparse, [0], where 0 is the index of the correct answer. When working with a batch, one-hot encoding will produce a 2D matrix, and sparse encoding will produce a 1D array. 
